@@ -6,13 +6,13 @@ import uk.antiperson.stackmob.api.checks.ApplicableTrait;
 
 public class ParrotTrait implements ApplicableTrait {
 
-    public String getConfigPath(){
+    public String getConfigPath() {
         return "compare.parrot-color";
     }
 
     @Override
     public boolean checkTrait(Entity original, Entity nearby) {
-        if(original instanceof Parrot){
+        if (original instanceof Parrot) {
             return ((Parrot) original).getVariant() != ((Parrot) nearby).getVariant();
         }
         return false;
@@ -20,7 +20,7 @@ public class ParrotTrait implements ApplicableTrait {
 
     @Override
     public void applyTrait(Entity original, Entity spawned) {
-        if(original instanceof Parrot){
+        if (original instanceof Parrot) {
             ((Parrot) spawned).setVariant(((Parrot) original).getVariant());
         }
     }

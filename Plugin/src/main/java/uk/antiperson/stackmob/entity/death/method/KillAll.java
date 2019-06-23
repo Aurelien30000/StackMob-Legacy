@@ -8,12 +8,12 @@ import uk.antiperson.stackmob.api.entity.death.DeathType;
 
 public class KillAll extends DeathStep {
 
-    public KillAll(IStackMob sm){
+    public KillAll(IStackMob sm) {
         super(sm, DeathType.KILL_ALL);
     }
 
     @Override
-    public int calculateStep(LivingEntity dead){
+    public int calculateStep(LivingEntity dead) {
         return StackTools.getSize(dead);
     }
 }

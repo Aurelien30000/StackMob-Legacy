@@ -8,8 +8,8 @@ import com.comphenix.protocol.wrappers.WrappedDataWatcher;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import uk.antiperson.stackmob.StackMob;
-import uk.antiperson.stackmob.api.compat.IHookManager;
 import uk.antiperson.stackmob.api.compat.Errorable;
+import uk.antiperson.stackmob.api.compat.IHookManager;
 import uk.antiperson.stackmob.api.compat.PluginCompat;
 import uk.antiperson.stackmob.compat.PluginHook;
 
@@ -18,25 +18,26 @@ import java.lang.reflect.InvocationTargetException;
 public class ProtocolLibHook extends PluginHook implements Errorable {
 
     private ProtocolManager protocolManager;
-    public ProtocolLibHook(IHookManager hm, StackMob sm){
+
+    public ProtocolLibHook(IHookManager hm, StackMob sm) {
         super(hm, sm, PluginCompat.PROCOTOLLIB);
     }
 
     @Override
-    public void enable(){
-        if(getStackMob().getCustomConfig().getBoolean("tag.show-player-nearby.enabled")){
+    public void enable() {
+        if (getStackMob().getCustomConfig().getBoolean("tag.show-player-nearby.enabled")) {
             protocolManager = ProtocolLibrary.getProtocolManager();
             getHookManager().registerHook(PluginCompat.PROCOTOLLIB, this);
         }
     }
 
     @Override
-    public void disable(){
+    public void disable() {
         getStackMob().getLogger().info("ProtocolLib is required for certain features, but it cannot be found!");
         getStackMob().getLogger().info("These feature(s) will not work until ProtocolLib is installed.");
     }
 
-    public void sendPacket(Player player, Entity entity, boolean visible){
+    public void sendPacket(Player player, Entity entity, boolean visible) {
         PacketContainer packet = protocolManager.createPacket(PacketType.Play.Server.ENTITY_METADATA);
         // Cloning the packet and getting the entity involved.
         WrappedDataWatcher watcher = new WrappedDataWatcher(entity);
@@ -48,9 +49,9 @@ public class ProtocolLibHook extends PluginHook implements Errorable {
         packet.getWatchableCollectionModifier().write(0, watcher.getWatchableObjects());
 
         // Send the new packet.
-        try{
+        try {
             protocolManager.sendServerPacket(player, packet);
-        }catch (InvocationTargetException e){
+        } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
     }

@@ -8,8 +8,8 @@ import uk.antiperson.stackmob.api.entity.StackTools;
 public class ExplodeEvent implements Listener {
 
     @EventHandler
-    public void onExplode(EntityExplodeEvent event){
-        if(StackTools.hasSizeMoreThanOne(event.getEntity())){
+    public void onExplode(EntityExplodeEvent event) {
+        if (StackTools.hasSizeMoreThanOne(event.getEntity())) {
             int stackSize = StackTools.getSize(event.getEntity());
             event.setYield(event.getYield() + (event.getYield() * (stackSize - 1) * 0.5f));
         }

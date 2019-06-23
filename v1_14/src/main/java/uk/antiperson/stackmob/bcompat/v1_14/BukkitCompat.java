@@ -17,12 +17,13 @@ import uk.antiperson.stackmob.bcompat.v1_14.listeners.DispenserShear;
 public class BukkitCompat implements Compat {
 
     private IStackMob sm;
+
     public BukkitCompat(IStackMob sm) {
         this.sm = sm;
     }
 
     @Override
-    public void onEnable(){
+    public void onEnable() {
         sm.getServer().getPluginManager().registerEvents(new DispenserShear(sm), sm);
         sm.getTraitManager().registerTrait(new CatTrait());
         sm.getTraitManager().registerTrait(new FoxTrait());
@@ -46,7 +47,7 @@ public class BukkitCompat implements Compat {
                         || type == Material.BEETROOT_SEEDS
                         || type == Material.PUMPKIN_SEEDS;
             case HORSE:
-                return (type == Material.GOLDEN_APPLE || type == Material.GOLDEN_CARROT) && ((Horse)entity).isTamed();
+                return (type == Material.GOLDEN_APPLE || type == Material.GOLDEN_CARROT) && ((Horse) entity).isTamed();
             case WOLF:
                 return (type == Material.BEEF
                         || type == Material.CHICKEN

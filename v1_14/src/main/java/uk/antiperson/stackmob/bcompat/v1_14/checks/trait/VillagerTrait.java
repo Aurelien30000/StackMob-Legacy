@@ -8,7 +8,7 @@ public class VillagerTrait implements ApplicableTrait {
 
     @Override
     public boolean checkTrait(Entity original, Entity nearby) {
-        if(original instanceof Villager){
+        if (original instanceof Villager) {
             return ((Villager) original).getProfession() != ((Villager) nearby).getProfession();
         }
         return false;
@@ -16,7 +16,7 @@ public class VillagerTrait implements ApplicableTrait {
 
     @Override
     public void applyTrait(Entity original, Entity spawned) {
-        if(original instanceof Villager){
+        if (original instanceof Villager) {
             ((Villager) spawned).setProfession(((Villager) original).getProfession());
         }
     }

@@ -10,14 +10,15 @@ import uk.antiperson.stackmob.api.tools.GlobalValues;
 public class QuitEvent implements Listener {
 
     private StackMob sm;
-    public QuitEvent(StackMob sm){
+
+    public QuitEvent(StackMob sm) {
         this.sm = sm;
     }
 
     @EventHandler
-    public void onQuit(PlayerQuitEvent event){
+    public void onQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        if(player.hasMetadata(GlobalValues.STICK_MODE)){
+        if (player.hasMetadata(GlobalValues.STICK_MODE)) {
             player.removeMetadata(GlobalValues.STICK_MODE, sm);
             player.removeMetadata(GlobalValues.SELECTED_ENTITY, sm);
             player.removeMetadata(GlobalValues.WAITING_FOR_INPUT, sm);

@@ -7,13 +7,13 @@ import uk.antiperson.stackmob.api.checks.SingleTrait;
 
 public class TameableTrait implements ApplicableTrait, SingleTrait {
 
-    public String getConfigPath(){
-        return"check.tamed";
+    public String getConfigPath() {
+        return "check.tamed";
     }
 
     @Override
     public boolean checkTrait(Entity original, Entity nearby) {
-        if(original instanceof Tameable){
+        if (original instanceof Tameable) {
             return (((Tameable) original).isTamed() || ((Tameable) nearby).isTamed());
         }
         return false;
@@ -21,7 +21,7 @@ public class TameableTrait implements ApplicableTrait, SingleTrait {
 
     @Override
     public boolean checkTrait(Entity original) {
-        if(original instanceof Tameable){
+        if (original instanceof Tameable) {
             return ((Tameable) original).isTamed();
         }
         return false;
@@ -29,7 +29,7 @@ public class TameableTrait implements ApplicableTrait, SingleTrait {
 
     @Override
     public void applyTrait(Entity original, Entity spawned) {
-        if(original instanceof Tameable){
+        if (original instanceof Tameable) {
             ((Tameable) spawned).setTamed(((Tameable) original).isTamed());
             ((Tameable) spawned).setOwner(((Tameable) original).getOwner());
         }

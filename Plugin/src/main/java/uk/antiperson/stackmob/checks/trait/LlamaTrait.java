@@ -6,13 +6,13 @@ import uk.antiperson.stackmob.api.checks.ApplicableTrait;
 
 public class LlamaTrait implements ApplicableTrait {
 
-    public String getConfigPath(){
+    public String getConfigPath() {
         return "compare.llama-color";
     }
 
     @Override
     public boolean checkTrait(Entity original, Entity nearby) {
-        if(original instanceof Llama){
+        if (original instanceof Llama) {
             return (((Llama) original).getColor() != ((Llama) nearby).getColor());
         }
         return false;
@@ -20,7 +20,7 @@ public class LlamaTrait implements ApplicableTrait {
 
     @Override
     public void applyTrait(Entity original, Entity spawned) {
-        if(original instanceof Llama){
+        if (original instanceof Llama) {
             ((Llama) spawned).setColor(((Llama) original).getColor());
         }
     }

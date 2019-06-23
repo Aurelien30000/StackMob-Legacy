@@ -18,9 +18,9 @@ public class TameEvent implements Listener {
     @EventHandler
     public void onTame(EntityTameEvent event) {
         Entity entity = event.getEntity();
-        if(StackTools.hasValidStackData(entity)){
+        if (StackTools.hasValidStackData(entity)) {
             int stackSize = StackTools.getSize(entity);
-            if(stackSize > 1){
+            if (stackSize > 1) {
                 Entity dupe = sm.getTools().duplicate(entity);
                 StackTools.setSize(dupe, stackSize - 1);
             }

@@ -10,13 +10,14 @@ public enum StickMode {
     DATA(6);
 
     private final int id;
-    StickMode(int id){
+
+    StickMode(int id) {
         this.id = id;
     }
 
-    public static StickMode getStickMode(int id){
-        for(StickMode mode : values()){
-            if(mode.id == id){
+    public static StickMode getStickMode(int id) {
+        for (StickMode mode : values()) {
+            if (mode.id == id) {
                 return mode;
             }
         }

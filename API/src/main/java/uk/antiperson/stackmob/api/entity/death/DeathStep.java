@@ -7,25 +7,26 @@ public abstract class DeathStep implements DeathMethod {
 
     private DeathType dt;
     private IStackMob sm;
-    public DeathStep(IStackMob sm, DeathType dt){
+
+    public DeathStep(IStackMob sm, DeathType dt) {
         this.sm = sm;
         this.dt = dt;
     }
 
-    public boolean isAllowed(LivingEntity dead){
+    public boolean isAllowed(LivingEntity dead) {
         String type = dt.getType();
-        if(!sm.getCustomConfig().getBoolean(type + ".enabled")){
+        if (!sm.getCustomConfig().getBoolean(type + ".enabled")) {
             return false;
         }
-        if(sm.getCustomConfig().getBoolean("death-type-permission")){
-            if(dead.getKiller() != null){
-                if(!(dead.getKiller().hasPermission("stackmob." + type))){
+        if (sm.getCustomConfig().getBoolean("death-type-permission")) {
+            if (dead.getKiller() != null) {
+                if (!(dead.getKiller().hasPermission("stackmob." + type))) {
                     return false;
                 }
             }
         }
         if (sm.getCustomConfig().getStringList(type + ".reason-blacklist")
-                .contains(dead.getLastDamageCause().getCause().toString())){
+                .contains(dead.getLastDamageCause().getCause().toString())) {
             return false;
         }
         return !(sm.getCustomConfig().getStringList(type + ".type-blacklist")

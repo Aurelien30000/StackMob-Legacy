@@ -15,12 +15,13 @@ public class TraitManager implements ITraitManager {
 
     private Set<ComparableTrait> comparableTraits = new HashSet<>();
     private IStackMob sm;
-    public TraitManager(IStackMob sm){
+
+    public TraitManager(IStackMob sm) {
         this.sm = sm;
     }
 
     @Override
-    public void registerTraits(){
+    public void registerTraits() {
         registerTrait(new AgeableTrait());
         registerTrait(new AnimalsTrait());
         registerTrait(new FireTrait(this));
@@ -33,14 +34,14 @@ public class TraitManager implements ITraitManager {
         registerTrait(new SlimeTrait());
         registerTrait(new TameableTrait());
         registerTrait(new ZombieTrait());
-        registerTrait(new DrownedTrait());
+        //registerTrait(new DrownedTrait()); Useless in 1.12.2
         registerTrait(new LoveTrait());
     }
 
     @Override
-    public boolean checkTraits(Entity original, Entity nearby){
-        for(ComparableTrait comparableTrait : comparableTraits){
-            if(comparableTrait.checkTrait(original, nearby)){
+    public boolean checkTraits(Entity original, Entity nearby) {
+        for (ComparableTrait comparableTrait : comparableTraits) {
+            if (comparableTrait.checkTrait(original, nearby)) {
                 return true;
             }
         }
@@ -48,9 +49,9 @@ public class TraitManager implements ITraitManager {
     }
 
     @Override
-    public boolean checkTraits(Entity original){
-        for(ComparableTrait comparableTrait : comparableTraits){
-            if(comparableTrait instanceof SingleTrait){
+    public boolean checkTraits(Entity original) {
+        for (ComparableTrait comparableTrait : comparableTraits) {
+            if (comparableTrait instanceof SingleTrait) {
                 SingleTrait singleTrait = (SingleTrait) comparableTrait;
                 return singleTrait.checkTrait(original);
             }
@@ -59,9 +60,9 @@ public class TraitManager implements ITraitManager {
     }
 
     @Override
-    public void applyTraits(Entity orginal, Entity spawned){
-        for(ComparableTrait comparableTrait : comparableTraits){
-            if(comparableTrait instanceof ApplicableTrait){
+    public void applyTraits(Entity orginal, Entity spawned) {
+        for (ComparableTrait comparableTrait : comparableTraits) {
+            if (comparableTrait instanceof ApplicableTrait) {
                 ApplicableTrait applicableTrait = (ApplicableTrait) comparableTrait;
                 applicableTrait.applyTrait(orginal, spawned);
             }
@@ -69,8 +70,8 @@ public class TraitManager implements ITraitManager {
     }
 
     @Override
-    public void registerTrait(ComparableTrait trait){
-        if(!sm.getCustomConfig().getBoolean(trait.getConfigPath())){
+    public void registerTrait(ComparableTrait trait) {
+        if (!sm.getCustomConfig().getBoolean(trait.getConfigPath())) {
             return;
         }
         comparableTraits.add(trait);
@@ -80,5 +81,5 @@ public class TraitManager implements ITraitManager {
     public IStackMob getStackMob() {
         return sm;
     }
-    
+
 }

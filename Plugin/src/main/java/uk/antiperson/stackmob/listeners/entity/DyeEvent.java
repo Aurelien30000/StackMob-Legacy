@@ -10,16 +10,17 @@ import uk.antiperson.stackmob.api.entity.StackTools;
 public class DyeEvent implements Listener {
 
     private IStackMob sm;
+
     public DyeEvent(IStackMob sm) {
         this.sm = sm;
     }
 
     @EventHandler
     public void onSheepDye(SheepDyeWoolEvent event) {
-        if(!(StackTools.hasSizeMoreThanOne(event.getEntity()))) {
+        if (!(StackTools.hasSizeMoreThanOne(event.getEntity()))) {
             return;
         }
-        if(event.isCancelled()){
+        if (event.isCancelled()) {
             return;
         }
         int stackSize = StackTools.getSize(event.getEntity());
@@ -29,7 +30,7 @@ public class DyeEvent implements Listener {
             Sheep newEntity = (Sheep) sm.getTools().duplicate(oldEntity);
             newEntity.setColor(event.getEntity().getColor());
             oldEntity.setColor(event.getColor());
-            StackTools.setSize(newEntity,stackSize - 1);
+            StackTools.setSize(newEntity, stackSize - 1);
             StackTools.makeSingle(oldEntity);
         }
     }

@@ -1,4 +1,4 @@
-package uk.antiperson.stackmob.checks.trait;
+/*package uk.antiperson.stackmob.checks.trait;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Drowned;
@@ -49,4 +49,4 @@ public class DrownedTrait implements ApplicableTrait {
             }
         }
     }
-}
+}*/

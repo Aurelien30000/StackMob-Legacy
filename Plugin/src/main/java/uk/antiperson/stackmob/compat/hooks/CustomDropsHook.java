@@ -12,22 +12,22 @@ import java.util.List;
 
 public class CustomDropsHook extends PluginHook {
 
-    public CustomDropsHook(IHookManager hm, StackMob sm){
+    public CustomDropsHook(IHookManager hm, StackMob sm) {
         super(hm, sm, PluginCompat.CUSTOMDROPS);
     }
 
     @Override
     public void enable() {
-        if(getStackMob().getCustomConfig().getBoolean("custom-drops.enabled")){
+        if (getStackMob().getCustomConfig().getBoolean("custom-drops.enabled")) {
             getHookManager().registerHook(PluginCompat.CUSTOMDROPS, this);
         }
     }
 
-    public List<ItemStack> getDrops(Entity entity){
+    public List<ItemStack> getDrops(Entity entity) {
         return CustomDropsAPI.getCustomDrops(entity.getType());
     }
 
-    public boolean hasCustomDrops(Entity entity){
+    public boolean hasCustomDrops(Entity entity) {
         return !CustomDropsAPI.getNaturalDrops(entity.getType());
     }
 }

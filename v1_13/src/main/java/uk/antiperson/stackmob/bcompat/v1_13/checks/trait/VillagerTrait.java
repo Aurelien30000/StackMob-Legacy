@@ -6,13 +6,13 @@ import uk.antiperson.stackmob.api.checks.ApplicableTrait;
 
 public class VillagerTrait implements ApplicableTrait {
 
-    public String getConfigPath(){
+    public String getConfigPath() {
         return "compare.villager-profession";
     }
 
     @Override
     public boolean checkTrait(Entity original, Entity nearby) {
-        if(original instanceof Villager){
+        if (original instanceof Villager) {
             if (((Villager) original).getProfession() != ((Villager) nearby).getProfession()) {
                 return true;
             }
@@ -23,7 +23,7 @@ public class VillagerTrait implements ApplicableTrait {
 
     @Override
     public void applyTrait(Entity original, Entity spawned) {
-        if(original instanceof Villager){
+        if (original instanceof Villager) {
             ((Villager) original).setProfession(((Villager) original).getProfession());
             ((Villager) original).setCareer(((Villager) original).getCareer());
         }

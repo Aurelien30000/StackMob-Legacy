@@ -1,6 +1,6 @@
 package uk.antiperson.stackmob.api.entity.multiplication;
 
-public enum Algorithm{
+public enum Algorithm {
     LEGACY,
     MINIMAL,
     NORMAL,

@@ -10,7 +10,7 @@ public class WorldTools {
 
     public static HashSet<Entity> getLoadedEntities() {
         HashSet<Entity> loadedEntities = new HashSet<>();
-        for(Player player : Bukkit.getOnlinePlayers()){
+        for (Player player : Bukkit.getOnlinePlayers()) {
             loadedEntities.addAll(player.getNearbyEntities(20, 20, 20));
         }
         return loadedEntities;

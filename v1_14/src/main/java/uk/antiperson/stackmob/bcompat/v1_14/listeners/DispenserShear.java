@@ -13,18 +13,19 @@ import uk.antiperson.stackmob.api.tools.ItemTools;
 public class DispenserShear implements Listener {
 
     private IStackMob sm;
+
     public DispenserShear(IStackMob sm) {
         this.sm = sm;
     }
 
     @EventHandler
     public void onDispenserShear(BlockShearEntityEvent event) {
-        if(!StackTools.hasSizeMoreThanOne(event.getEntity())) {
+        if (!StackTools.hasSizeMoreThanOne(event.getEntity())) {
             return;
         }
-        if(event.getEntity() instanceof Sheep) {
+        if (event.getEntity() instanceof Sheep) {
             Sheep sheep = (Sheep) event.getEntity();
-            if(sm.getLogic().doSheepShearAll(sheep, event.getTool())){
+            if (sm.getLogic().doSheepShearAll(sheep, event.getTool())) {
                 ItemStack is = ItemTools.damageItem(event.getTool(), StackTools.getSize(event.getEntity()));
                 sm.getServer().getScheduler().runTask(sm, () -> {
                     Container dispenser = (Container) event.getBlock().getState();

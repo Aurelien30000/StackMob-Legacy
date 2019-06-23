@@ -9,18 +9,14 @@ import java.util.UUID;
 public class CacheTask extends BukkitRunnable {
 
     private StackMob sm;
-    public CacheTask(StackMob sm){
+
+    public CacheTask(StackMob sm) {
         this.sm = sm;
     }
 
     @Override
     public void run() {
         Map<UUID, Integer> values = sm.getStorageManager().getCombinedMap();
-        sm.getServer().getScheduler().runTaskAsynchronously(sm, new Runnable() {
-            @Override
-            public void run() {
-                sm.getStorageManager().getStackStorage().saveStorage(values);
-            }
-        });
+        sm.getServer().getScheduler().runTaskAsynchronously(sm, () -> sm.getStorageManager().getStackStorage().saveStorage(values));
     }
 }

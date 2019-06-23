@@ -5,7 +5,8 @@ import uk.antiperson.stackmob.StackMob;
 public abstract class StackStorage implements uk.antiperson.stackmob.api.cache.StackStorage {
 
     private StorageManager storageManager;
-    public StackStorage(StorageManager storageManager){
+
+    public StackStorage(StorageManager storageManager) {
         this.storageManager = storageManager;
     }
 
@@ -15,7 +16,7 @@ public abstract class StackStorage implements uk.antiperson.stackmob.api.cache.S
     }
 
     @Override
-    public StackMob getStackMob(){
+    public StackMob getStackMob() {
         return storageManager.getStackMob();
     }
 

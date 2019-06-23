@@ -7,10 +7,7 @@ import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Monster;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import uk.antiperson.stackmob.api.entity.StackTools;
 import uk.antiperson.stackmob.api.tools.GlobalValues;
 
@@ -28,7 +25,7 @@ public class Commands implements CommandExecutor {
     }
 
     private final String noPerm = GlobalValues.PLUGIN_TAG + GlobalValues.ERROR_TAG +
-        "You do not have the permission to perform this command! If you believe this is in error, contact the server administration.";
+            "You do not have the permission to perform this command! If you believe this is in error, contact the server administration.";
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String name, String[] args) {
@@ -94,11 +91,13 @@ public class Commands implements CommandExecutor {
                     case "hostile":
                         filter = entity -> entity instanceof Monster;
                         break;
-
+                    case "animals":
+                        filter = entity -> entity instanceof Animals;
+                        break;
                     default:
                         // If any other cases are added, they should also be added to this error.
                         sender.sendMessage(GlobalValues.PLUGIN_TAG + GlobalValues.ERROR_TAG +
-                            "Invalid filter type, expected 'hostile'");
+                                "Invalid filter type, expected 'hostile', 'animals'");
                         return true;
                 }
 
@@ -154,7 +153,7 @@ public class Commands implements CommandExecutor {
 
                 sender.sendMessage(GlobalValues.PLUGIN_TAG + ChatColor.GOLD + "Entity stacking statistics:");
                 sender.sendMessage(ChatColor.YELLOW + "Loaded entities: " + ChatColor.GREEN + StackTools.getEntries().size() + " (" + stackedTotal + " stacked.) "
-                    + ChatColor.YELLOW + "Loaded entities (this chunk): " + ChatColor.GREEN + stackedCount1 + " (" + stackedTotal1 + " stacked.) ");
+                        + ChatColor.YELLOW + "Loaded entities (this chunk): " + ChatColor.GREEN + stackedCount1 + " (" + stackedTotal1 + " stacked.) ");
                 sender.sendMessage(ChatColor.YELLOW + "Cached entities: " + ChatColor.GREEN + sm.getCache().size() + " (" + cacheTotal + " stacked.) ");
                 break;
             }
@@ -168,7 +167,7 @@ public class Commands implements CommandExecutor {
                     player.sendMessage(GlobalValues.PLUGIN_TAG + ChatColor.YELLOW + "The stacking tool has been added to your inventory.");
                 } else {
                     sender.sendMessage(GlobalValues.PLUGIN_TAG + GlobalValues.ERROR_TAG +
-                        "You need to be a player to do this!");
+                            "You need to be a player to do this!");
                 }
                 break;
             }
@@ -203,7 +202,7 @@ public class Commands implements CommandExecutor {
                     sender.sendMessage(GlobalValues.PLUGIN_TAG + ChatColor.GREEN + "A total of " + counter + " entities were removed.");
                 } catch (NumberFormatException e) {
                     sender.sendMessage(GlobalValues.PLUGIN_TAG + GlobalValues.ERROR_TAG +
-                        "Invalid number format!");
+                            "Invalid number format!");
                 }
                 break;
             }
@@ -216,7 +215,7 @@ public class Commands implements CommandExecutor {
                     numb = Integer.valueOf(args[1]);
                 } catch (NumberFormatException e) {
                     sender.sendMessage(GlobalValues.PLUGIN_TAG + GlobalValues.ERROR_TAG +
-                        "Invalid number format!");
+                            "Invalid number format!");
                     return false;
                 }
                 boolean contains = false;
@@ -231,14 +230,14 @@ public class Commands implements CommandExecutor {
                     sender.sendMessage(GlobalValues.PLUGIN_TAG + ChatColor.GREEN + "Spawned a " + args[2].toUpperCase() + " with a stack size of " + numb + " at your location.");
                 } else {
                     sender.sendMessage(GlobalValues.PLUGIN_TAG + GlobalValues.ERROR_TAG +
-                        "Invalid entity type!");
+                            "Invalid entity type!");
                 }
                 break;
             }
 
             default:
                 sender.sendMessage(GlobalValues.PLUGIN_TAG + GlobalValues.ERROR_TAG +
-                    "Incorrect command parameters!");
+                        "Incorrect command parameters!");
                 break;
         }
         return true;
@@ -263,7 +262,7 @@ public class Commands implements CommandExecutor {
     private boolean checkArgs(CommandSender sender, String[] args, int req) {
         if (args.length < req) {
             sender.sendMessage(GlobalValues.PLUGIN_TAG + GlobalValues.ERROR_TAG +
-                "Incorrect command parameters!");
+                    "Incorrect command parameters!");
             return false;
         }
         return true;
@@ -274,7 +273,7 @@ public class Commands implements CommandExecutor {
             return true;
         }
         sender.sendMessage(GlobalValues.PLUGIN_TAG + GlobalValues.ERROR_TAG +
-            "You need to be a player to do this!");
+                "You need to be a player to do this!");
         return false;
     }
 

@@ -13,7 +13,8 @@ public abstract class PluginHook implements uk.antiperson.stackmob.api.compat.Pl
     private Plugin plugin;
     private String pluginName;
     private PluginCompat pluginCompat;
-    public PluginHook(IHookManager hm, StackMob sm, PluginCompat hooks){
+
+    public PluginHook(IHookManager hm, StackMob sm, PluginCompat hooks) {
         plugin = Bukkit.getPluginManager().getPlugin(hooks.getName());
         pluginName = hooks.getName();
         stackMob = sm;
@@ -27,7 +28,7 @@ public abstract class PluginHook implements uk.antiperson.stackmob.api.compat.Pl
     }
 
     @Override
-    public Plugin getPlugin(){
+    public Plugin getPlugin() {
         return plugin;
     }
 

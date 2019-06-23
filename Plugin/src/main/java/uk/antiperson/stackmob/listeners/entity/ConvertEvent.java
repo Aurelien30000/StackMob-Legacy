@@ -1,4 +1,4 @@
-package uk.antiperson.stackmob.listeners.entity;
+/*package uk.antiperson.stackmob.listeners.entity;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,4 +18,4 @@ public class ConvertEvent implements Listener {
             StackTools.removeSize(event.getEntity());
         }
     }
-}
+}*/

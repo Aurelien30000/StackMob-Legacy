@@ -7,6 +7,7 @@
     <modules>
         <module>API</module>
         <module>Plugin</module>
+        <module>v1_12</module>
         <module>v1_13</module>
         <module>v1_14</module>
     </modules>
@@ -17,7 +18,21 @@
 
     <groupId>uk.antiperson.stackmob</groupId>
     <artifactId>StackMob-2</artifactId>
-    <version>4.0.0</version>
+    <version>4.0.1</version>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <repositories>
         <repository>
@@ -30,7 +45,7 @@
         <dependency>
             <groupId>com.destroystokyo.paper</groupId>
             <artifactId>paper-api</artifactId>
-            <version>1.13.2-R0.1-SNAPSHOT</version>
+            <version>1.12.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 

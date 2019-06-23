@@ -12,25 +12,26 @@ import uk.antiperson.stackmob.api.tools.GlobalValues;
 public class ReceivedDamageEvent implements Listener {
 
     private StackMob sm;
+
     public ReceivedDamageEvent(StackMob sm) {
         this.sm = sm;
     }
 
     @EventHandler
     public void onDamageReceived(EntityDamageEvent event) {
-        if(event.getEntity() instanceof LivingEntity){
-            if(StackTools.hasValidStackData(event.getEntity())){
+        if (event.getEntity() instanceof LivingEntity) {
+            if (StackTools.hasValidStackData(event.getEntity())) {
                 LivingEntity entity = (LivingEntity) event.getEntity();
-                if(sm.getCustomConfig().getBoolean("kill-step-damage.enabled")){
+                if (sm.getCustomConfig().getBoolean("kill-step-damage.enabled")) {
                     double healthAfter = entity.getHealth() - event.getFinalDamage();
-                    if(healthAfter <= 0){
+                    if (healthAfter <= 0) {
                         entity.setMetadata(GlobalValues.LEFTOVER_DAMAGE, new FixedMetadataValue(sm, Math.abs(healthAfter)));
                     }
                 }
 
-                if(!sm.getCustomConfig().getStringList("multiply-damage-received.cause-blacklist")
+                if (!sm.getCustomConfig().getStringList("multiply-damage-received.cause-blacklist")
                         .contains(event.getCause().toString())) {
-                    if(event.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK){
+                    if (event.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
                         return;
                     }
                     int stackSize = StackTools.getSize(entity);

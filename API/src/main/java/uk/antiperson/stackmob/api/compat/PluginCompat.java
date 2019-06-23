@@ -11,13 +11,14 @@ public enum PluginCompat {
     CUSTOMDROPS("CustomDrops");
 
     private final String name;
-    PluginCompat(String name){
+
+    PluginCompat(String name) {
         this.name = name;
     }
 
     public static PluginCompat getPluginHooks(String name) {
-        for(PluginCompat hooks : values()){
-            if(hooks.name.equals(name)){
+        for (PluginCompat hooks : values()) {
+            if (hooks.name.equals(name)) {
                 return hooks;
             }
         }

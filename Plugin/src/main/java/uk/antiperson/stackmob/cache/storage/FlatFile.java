@@ -15,36 +15,38 @@ public class FlatFile extends StackStorage {
 
     private File file;
     private FileConfiguration fileCon;
-    public FlatFile(StorageManager storageManager){
+
+    public FlatFile(StorageManager storageManager) {
         super(storageManager);
         file = new File(getStackMob().getDataFolder(), "cache.yml");
         reloadFile();
     }
 
     @Override
-    public void loadStorage(){
-        for(String key : fileCon.getKeys(false)){
+    public void loadStorage() {
+        for (String key : fileCon.getKeys(false)) {
             getStorageManager().getAmountCache().put(UuidUtil.fromString(key), fileCon.getInt(key));
         }
     }
 
     @Override
-    public void saveStorage(Map<UUID, Integer> values){
+    public void saveStorage(Map<UUID, Integer> values) {
         getFile().delete();
         reloadFile();
 
-        for(Map.Entry<UUID, Integer> entry : values.entrySet()){
+        for (Map.Entry<UUID, Integer> entry : values.entrySet()) {
+            if (entry.getValue() <= 1) continue;
             fileCon.set(UuidUtil.filterString(entry.getKey().toString()), entry.getValue());
         }
 
-        try{
+        try {
             fileCon.save(file);
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void reloadFile(){
+    private void reloadFile() {
         fileCon = YamlConfiguration.loadConfiguration(file);
     }
 

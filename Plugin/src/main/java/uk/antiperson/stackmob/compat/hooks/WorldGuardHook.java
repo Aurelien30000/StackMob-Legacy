@@ -4,33 +4,34 @@ import org.bukkit.entity.Entity;
 import uk.antiperson.stackmob.StackMob;
 import uk.antiperson.stackmob.api.compat.IHookManager;
 import uk.antiperson.stackmob.api.compat.PluginCompat;
-import uk.antiperson.stackmob.compat.PluginHook;
 import uk.antiperson.stackmob.api.compat.Testable;
+import uk.antiperson.stackmob.compat.PluginHook;
 
 public class WorldGuardHook extends PluginHook implements Testable {
 
     private WorldGuardCompat worldGuardCompat;
-    public WorldGuardHook(IHookManager hm, StackMob sm){
+
+    public WorldGuardHook(IHookManager hm, StackMob sm) {
         super(hm, sm, PluginCompat.WORLDGUARD);
-        if(isCorrectVersion()){
+        if (isCorrectVersion()) {
             worldGuardCompat = new WorldGuardCompat(sm);
         }
     }
 
-    public void onLoad(){
-        if(getPlugin() != null) {
-            if(worldGuardCompat != null){
+    public void onLoad() {
+        if (getPlugin() != null) {
+            if (worldGuardCompat != null) {
                 worldGuardCompat.registerFlag();
             }
         }
     }
 
     @Override
-    public void enable(){
-        if(getStackMob().getCustomConfig().getBoolean("worldguard-support")){
-            if(worldGuardCompat != null) {
+    public void enable() {
+        if (getStackMob().getCustomConfig().getBoolean("worldguard-support")) {
+            if (worldGuardCompat != null) {
                 getHookManager().registerHook(PluginCompat.WORLDGUARD, this);
-            }else{
+            } else {
                 getStackMob().getLogger().warning("In order for this functionality to work, WorldGuard 7.0 or later needs to be installed.");
             }
         }
@@ -41,11 +42,11 @@ public class WorldGuardHook extends PluginHook implements Testable {
         return worldGuardCompat.test(entity);
     }
 
-    private boolean isCorrectVersion(){
+    private boolean isCorrectVersion() {
         try {
             Class.forName("com.sk89q.worldguard.WorldGuard");
             return true;
-        }catch (ClassNotFoundException e){
+        } catch (ClassNotFoundException e) {
             return false;
         }
     }

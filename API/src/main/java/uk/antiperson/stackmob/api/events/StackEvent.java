@@ -8,12 +8,14 @@ public class StackEvent extends Event {
 
     private StackedEntity stackedEntity;
     private static final HandlerList handlers = new HandlerList();
-    public StackEvent(StackedEntity entity){
+
+    public StackEvent(StackedEntity entity) {
         stackedEntity = entity;
     }
 
     /**
      * Gets the stacked entity involved in the event.
+     *
      * @return entity involved.
      */
     public StackedEntity getStackedEntity() {

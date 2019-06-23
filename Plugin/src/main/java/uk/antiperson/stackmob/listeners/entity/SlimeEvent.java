@@ -11,9 +11,9 @@ public class SlimeEvent implements Listener {
 
     @EventHandler
     public void onSlimeEvent(SlimeSplitEvent e) {
-        if(StackTools.hasSizeMoreThanOne(e.getEntity())){
+        if (StackTools.hasSizeMoreThanOne(e.getEntity())) {
             int stackSize = StackTools.getSize(e.getEntity()) - 1;
-            int randomAmount = ThreadLocalRandom.current().nextInt(2,4);
+            int randomAmount = ThreadLocalRandom.current().nextInt(2, 4);
             e.setCount(e.getCount() + (stackSize * randomAmount));
         }
     }

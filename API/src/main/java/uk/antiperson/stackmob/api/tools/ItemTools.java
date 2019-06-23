@@ -4,8 +4,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
-import org.bukkit.inventory.meta.ItemMeta;
 
 public class ItemTools {
 
@@ -14,25 +12,22 @@ public class ItemTools {
         player.getInventory().setItemInMainHand(is);
     }
 
-    public static ItemStack damageItem(ItemStack item, int stackSize){
-        Damageable meta = (Damageable) item.getItemMeta();
-        meta.setDamage(meta.getDamage() + stackSize);
-        item.setItemMeta((ItemMeta) meta);
+    public static ItemStack damageItem(ItemStack item, int stackSize) {
+        item.setDurability((short) (item.getDurability() + stackSize));
         return item;
     }
 
     public static boolean hasEnoughDurability(Player player, int stackSize) {
-        if(!hasEnoughDurability(player.getInventory().getItemInMainHand(), stackSize)){
+        if (!hasEnoughDurability(player.getInventory().getItemInMainHand(), stackSize)) {
             player.sendActionBar(ChatColor.RED + "Item is too damaged to shear all!");
-            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
+            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BASS, 1, 1);
             return false;
         }
         return true;
     }
 
     public static boolean hasEnoughDurability(ItemStack item, int stackSize) {
-        Damageable meta = (Damageable) item.getItemMeta();
-        int newDamage = meta.getDamage() + stackSize;
+        int newDamage = item.getDurability() + stackSize;
         return newDamage <= item.getType().getMaxDurability();
     }
 }

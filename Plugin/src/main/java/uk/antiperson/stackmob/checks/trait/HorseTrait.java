@@ -13,7 +13,7 @@ public class HorseTrait implements ApplicableTrait {
 
     @Override
     public boolean checkTrait(Entity original, Entity nearby) {
-        if(original instanceof Horse){
+        if (original instanceof Horse) {
             return (((Horse) original).getColor() != ((Horse) nearby).getColor());
         }
         return false;
@@ -21,7 +21,7 @@ public class HorseTrait implements ApplicableTrait {
 
     @Override
     public void applyTrait(Entity original, Entity spawned) {
-        if(original instanceof Horse){
+        if (original instanceof Horse) {
             ((Horse) spawned).setColor(((Horse) original).getColor());
             // another trait?
         }

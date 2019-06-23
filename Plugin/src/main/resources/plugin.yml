@@ -5,8 +5,7 @@ main: uk.antiperson.stackmob.StackMob
 website: https://www.spigotmc.org/resources/stackmob.29999/
 softdepend: [MythicMobs, MiniaturePets, ProtocolLib, WorldGuard, Jobs, Citizens, CustomDrops]
 description: The only mob-stacking plugin that you will ever need.
-api-version: 1.13
-load: STARTUP
+load: POSTWORLD
 commands:
   stackmob:
     description: The main command

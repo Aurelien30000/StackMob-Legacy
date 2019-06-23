@@ -6,13 +6,13 @@ import uk.antiperson.stackmob.api.checks.ApplicableTrait;
 
 public class ZombieTrait implements ApplicableTrait {
 
-    public String getConfigPath(){
+    public String getConfigPath() {
         return "compare.entity-age";
     }
 
     @Override
     public boolean checkTrait(Entity original, Entity nearby) {
-        if(original instanceof Zombie){
+        if (original instanceof Zombie) {
             return (((Zombie) original).isBaby() != ((Zombie) nearby).isBaby());
         }
         return false;
@@ -20,7 +20,7 @@ public class ZombieTrait implements ApplicableTrait {
 
     @Override
     public void applyTrait(Entity original, Entity spawned) {
-        if(original instanceof Zombie) {
+        if (original instanceof Zombie) {
             ((Zombie) spawned).setBaby(((Zombie) original).isBaby());
         }
     }

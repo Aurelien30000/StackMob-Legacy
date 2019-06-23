@@ -1,12 +1,14 @@
 package uk.antiperson.stackmob.api.tools;
 
 public enum BukkitVersion {
-    UNSUPPORTED(0),
+    UNSUPPORTED(-1),
+    V1_12(0),
     V1_13(1),
     V1_14(2);
 
     private int id;
-    BukkitVersion(int id){
+
+    BukkitVersion(int id) {
         this.id = id;
     }
 

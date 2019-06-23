@@ -7,13 +7,13 @@ import uk.antiperson.stackmob.api.checks.SingleTrait;
 
 public class LeashedTrait implements ComparableTrait, SingleTrait {
 
-    public String getConfigPath(){
+    public String getConfigPath() {
         return "check.leashed";
     }
 
     @Override
     public boolean checkTrait(Entity original, Entity nearby) {
-        if(original instanceof LivingEntity){
+        if (original instanceof LivingEntity) {
             return (((LivingEntity) original).isLeashed() || ((LivingEntity) nearby).isLeashed());
         }
         return false;
@@ -21,7 +21,7 @@ public class LeashedTrait implements ComparableTrait, SingleTrait {
 
     @Override
     public boolean checkTrait(Entity original) {
-        if(original instanceof LivingEntity){
+        if (original instanceof LivingEntity) {
             return ((LivingEntity) original).isLeashed();
         }
         return false;

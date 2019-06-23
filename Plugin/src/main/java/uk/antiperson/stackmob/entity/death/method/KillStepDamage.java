@@ -10,7 +10,7 @@ import uk.antiperson.stackmob.api.tools.GlobalValues;
 
 public class KillStepDamage extends DeathStep {
 
-    public KillStepDamage(IStackMob sm){
+    public KillStepDamage(IStackMob sm) {
         super(sm, DeathType.KILL_STEP_DAMAGE);
     }
 
@@ -20,21 +20,21 @@ public class KillStepDamage extends DeathStep {
         return (int) Math.floor(damageDivided) + 1;
     }
 
-    public void onceSpawned(LivingEntity dead, LivingEntity spawned){
+    public void onceSpawned(LivingEntity dead, LivingEntity spawned) {
         double damageDivided = getLeftoverDamage(dead) / getMaxHealth(dead);
         double killStep = Math.floor(damageDivided);
         double damageToDeal = (damageDivided - killStep) * getMaxHealth(dead);
         spawned.setHealth(spawned.getHealth() - damageToDeal);
     }
 
-    private double getLeftoverDamage(LivingEntity dead){
-        if(StackTools.hasValidMetadata(dead, GlobalValues.LEFTOVER_DAMAGE)){
+    private double getLeftoverDamage(LivingEntity dead) {
+        if (StackTools.hasValidMetadata(dead, GlobalValues.LEFTOVER_DAMAGE)) {
             return dead.getMetadata(GlobalValues.LEFTOVER_DAMAGE).get(0).asDouble();
         }
         return 0;
     }
 
-    private double getMaxHealth(LivingEntity dead){
+    private double getMaxHealth(LivingEntity dead) {
         return dead.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
     }
 }

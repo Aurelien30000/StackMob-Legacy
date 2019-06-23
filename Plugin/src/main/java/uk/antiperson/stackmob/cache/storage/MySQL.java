@@ -1,15 +1,11 @@
 package uk.antiperson.stackmob.cache.storage;
 
 import uk.antiperson.stackmob.api.cache.DisableCleanup;
-import uk.antiperson.stackmob.cache.StackStorage;
 import uk.antiperson.stackmob.api.tools.UuidUtil;
+import uk.antiperson.stackmob.cache.StackStorage;
 import uk.antiperson.stackmob.cache.StorageManager;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Map;
 import java.util.UUID;
 
@@ -38,7 +34,7 @@ public class MySQL extends StackStorage implements DisableCleanup {
             makeConnection();
             getStackMob().getLogger().info("Database connection successful!");
             // Convert existing CHAR column UUIDs to BINARY type
-            if(isOldUUIDStorageType()) {
+            if (isOldUUIDStorageType()) {
                 convertToBinaryUUIDStorage();
                 return;
             }
@@ -59,8 +55,8 @@ public class MySQL extends StackStorage implements DisableCleanup {
         }
     }
 
-    private boolean isOldUUIDStorageType(){
-        try (ResultSet rs = connection.prepareStatement("SELECT * FROM stackmob LIMIT 0").executeQuery()){
+    private boolean isOldUUIDStorageType() {
+        try (ResultSet rs = connection.prepareStatement("SELECT * FROM stackmob LIMIT 0").executeQuery()) {
             return rs.getMetaData().getColumnType(1) == 1;
         } catch (SQLException e) {
             return false;
@@ -69,12 +65,12 @@ public class MySQL extends StackStorage implements DisableCleanup {
 
     private void convertToBinaryUUIDStorage() {
         getStackMob().getLogger().info("Converting existing database to use BINARY type UUIDs");
-        try (ResultSet rs = connection.prepareStatement("SELECT UUID, size FROM stackmob").executeQuery()){
-            while (rs.next()){
+        try (ResultSet rs = connection.prepareStatement("SELECT UUID, size FROM stackmob").executeQuery()) {
+            while (rs.next()) {
                 getStorageManager().getAmountCache().put(UUID.fromString(rs.getString(1)), rs.getInt(2));
             }
             saveStorage(getStorageManager().getAmountCache());
-        }catch (SQLException e){
+        } catch (SQLException e) {
             getStackMob().getLogger().warning("An error occurred while converting existing database.");
             e.printStackTrace();
         }
@@ -105,7 +101,7 @@ public class MySQL extends StackStorage implements DisableCleanup {
     }
 
     private void makeConnection() throws SQLException {
-        if(connection == null || connection.isClosed()) {
+        if (connection == null || connection.isClosed()) {
             String url = "jdbc:mysql://" + hostname + ":" + port + "/" + dbName + "?useSSL=false&rewriteBatchedStatements=true";
             connection = DriverManager.getConnection(url, username, password);
         }

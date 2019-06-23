@@ -5,7 +5,9 @@ import org.bukkit.Bukkit;
 public class VersionHelper {
 
     public static BukkitVersion getVersion() {
-        if (Bukkit.getVersion().contains("1.13")) {
+        if (Bukkit.getVersion().contains("1.12")) {
+            return BukkitVersion.V1_12;
+        } else if (Bukkit.getVersion().contains("1.13")) {
             return BukkitVersion.V1_13;
         } else if (Bukkit.getVersion().contains("1.14")) {
             return BukkitVersion.V1_14;
